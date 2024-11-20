@@ -98,6 +98,7 @@ int main()
     improvedQuickSort(test8);
     t8.elapsed();
     check(test8, oneToHundred);
+    std::cout << std::endl;
 
     /* ten thousand test */
     std::cout << "1-10000 test" << std::endl;
@@ -153,6 +154,7 @@ int main()
     improvedQuickSort(test18);
     t18.elapsed();
     check(test18, tenThousand);
+    std::cout << std::endl;
 
     /* one-million test */
     std::cout << "1-1000000 test" << std::endl;
