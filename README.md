@@ -6,6 +6,7 @@
 - quick
 - heap
 - radix
+- improved quick sort
 
 test done.
 build command: g++ -std=c++17 test.cpp -o test
