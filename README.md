@@ -9,4 +9,4 @@
 - improved quick sort
 
 test done.
-build command: g++ -std=c++11 test.cpp -o test
+build command: make
