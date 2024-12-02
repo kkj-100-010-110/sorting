@@ -42,16 +42,16 @@ int main()
 
     /* 1-100 array test */
     std::cout << "1-100 test" << std::endl;
-    std::vector<int32_t> oneToHundred;
+    std::vector<int> oneToHundred;
     oneToHundred = oneToHundredShuffleArr();
-    std::vector<int32_t> test1 = oneToHundred;
-    std::vector<int32_t> test2 = oneToHundred;
-    std::vector<int32_t> test3 = oneToHundred;
-    std::vector<int32_t> test4 = oneToHundred;
-    std::vector<int32_t> test5 = oneToHundred;
-    std::vector<int32_t> test6 = oneToHundred;
-    std::vector<int32_t> test7 = oneToHundred;
-    std::vector<int32_t> test8 = oneToHundred;
+    std::vector<int> test1 = oneToHundred;
+    std::vector<int> test2 = oneToHundred;
+    std::vector<int> test3 = oneToHundred;
+    std::vector<int> test4 = oneToHundred;
+    std::vector<int> test5 = oneToHundred;
+    std::vector<int> test6 = oneToHundred;
+    std::vector<int> test7 = oneToHundred;
+    std::vector<int> test8 = oneToHundred;
 
     // std::cout << "before sorting" << std::endl;
     // print(oneToHundred);
@@ -102,16 +102,16 @@ int main()
 
     /* ten thousand test */
     std::cout << "1-10000 test" << std::endl;
-    std::vector<int32_t> tenThousand;
+    std::vector<int> tenThousand;
     tenThousand = tenThousandShuffleArr();
-    std::vector<int32_t> test11 = tenThousand;
-    std::vector<int32_t> test12 = tenThousand;
-    std::vector<int32_t> test13 = tenThousand;
-    std::vector<int32_t> test14 = tenThousand;
-    std::vector<int32_t> test15 = tenThousand;
-    std::vector<int32_t> test16 = tenThousand;
-    std::vector<int32_t> test17 = tenThousand;
-    std::vector<int32_t> test18 = tenThousand;
+    std::vector<int> test11 = tenThousand;
+    std::vector<int> test12 = tenThousand;
+    std::vector<int> test13 = tenThousand;
+    std::vector<int> test14 = tenThousand;
+    std::vector<int> test15 = tenThousand;
+    std::vector<int> test16 = tenThousand;
+    std::vector<int> test17 = tenThousand;
+    std::vector<int> test18 = tenThousand;
 
     std::sort(tenThousand.begin(), tenThousand.end());
     std::cout << "selection" << std::endl;
@@ -158,13 +158,14 @@ int main()
 
     /* one-million test */
     std::cout << "1-1000000 test" << std::endl;
-    std::vector<int32_t> oneMillion;
+    std::vector<int> oneMillion;
     oneMillion = oneMillionShuffleArr();
-    std::vector<int32_t> test111 = oneMillion;
-    std::vector<int32_t> test112 = oneMillion;
-    std::vector<int32_t> test113 = oneMillion;
-    std::vector<int32_t> test114 = oneMillion;
-    std::vector<int32_t> test115 = oneMillion;
+    std::vector<int> test111 = oneMillion;
+    std::vector<int> test112 = oneMillion;
+    std::vector<int> test113 = oneMillion;
+    std::vector<int> test114 = oneMillion;
+    std::vector<int> test115 = oneMillion;
+    std::vector<int> test116 = oneMillion;
     std::sort(oneMillion.begin(), oneMillion.end());
 
     std::cout << "merge" << std::endl;
@@ -172,6 +173,11 @@ int main()
     mergeSort(test111);
     t111.elapsed();
     check(test111, oneMillion);
+    std::cout << "improved merge" << std::endl;
+    Timer t116;
+    improvedMergeSort(test116);
+    t116.elapsed();
+    check(test116, oneMillion);
     std::cout << "quick" << std::endl;
     Timer t112;
     quickSort(test112);

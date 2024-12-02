@@ -26,7 +26,7 @@
 
 
 /* random number generator */
-int getRandomNumber(int32_t min, int32_t max)
+int getRandomNumber(int min, int max)
 {
     static const double fraction = 1.0 / (RAND_MAX + 1.0);
     return min + static_cast<int>((max - min + 1) * (std::rand() * fraction));
@@ -43,10 +43,10 @@ int getRnadomNumber()
 }
 
 /* 1-100 shuffled array generator */
-std::vector<int32_t> oneToHundredShuffleArr()
+std::vector<int> oneToHundredShuffleArr()
 {
-    std::vector<int32_t> arr;
-    for (int32_t i = 0; i < 100; i++)
+    std::vector<int> arr;
+    for (int i = 0; i < 100; i++)
         arr.push_back(i + 1);
 
     std::random_device  rd;
@@ -57,10 +57,10 @@ std::vector<int32_t> oneToHundredShuffleArr()
 }
 
 /* ten thousand shuffled array generator */
-std::vector<int32_t> tenThousandShuffleArr()
+std::vector<int> tenThousandShuffleArr()
 {
-    std::vector<int32_t> arr;
-    for (int32_t i = 0; i < 10000; i++)
+    std::vector<int> arr;
+    for (int i = 0; i < 10000; i++)
         arr.push_back(i + 1);
 
     std::random_device  rd;
@@ -71,10 +71,10 @@ std::vector<int32_t> tenThousandShuffleArr()
 }
 
 /* one million shuffled array generator */
-std::vector<int32_t> oneMillionShuffleArr()
+std::vector<int> oneMillionShuffleArr()
 {
-    std::vector<int32_t> arr;
-    for (int32_t i = 0; i < 1000000; i++)
+    std::vector<int> arr;
+    for (int i = 0; i < 1000000; i++)
         arr.push_back(i + 1);
 
     std::random_device  rd;
@@ -89,9 +89,12 @@ template<typename T>
 void check(std::vector<T> arr, std::vector<T> answer)
 {
     if (arr.size() != answer.size())
+    {
         std::cerr << "\033[3;41;30mError: they are not the same size.\033[0m\t\t" << std::endl;
+        return;
+    }
 
-    int32_t i;
+    int i;
     for (i = 0; i < arr.size() && arr[i] == answer[i]; i++)
         ;
     if (i == arr.size())
@@ -121,9 +124,9 @@ public:
 
 /* print */
 template<typename T>
-void print(T arr[], int32_t n)
+void print(T arr[], int n)
 {
-    for (int32_t i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
         std::cout << arr[i] << " ";
     std::cout << std::endl;
 }
@@ -131,7 +134,7 @@ void print(T arr[], int32_t n)
 template<typename T, size_t S>
 void print(std::array<T, S> arr)
 {
-    for (int32_t i = 0; i < S; i++)
+    for (int i = 0; i < S; i++)
         std::cout << arr[i] << " ";
     std::cout << std::endl;
 }
@@ -139,7 +142,7 @@ void print(std::array<T, S> arr)
 template<typename T>
 void print(std::vector<T> arr)
 {
-    // for (int32_t i = 0; i < arr.size(); i++)
+    // for (int i = 0; i < arr.size(); i++)
     //     std::cout << arr[i] << " ";
     // std::cout << std::endl;
     for (auto& e : arr)

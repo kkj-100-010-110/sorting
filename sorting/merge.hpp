@@ -94,42 +94,130 @@ void mergeSort(std::array<T, S>& arr)
     mergeSort_(arr, 0, arr.size()-1);
 }
 
+// template<typename T>
+// void merge(std::vector<T>& arr, int begin, int middle, int end)
+// {
+//     std::vector<T> subArr;
+//     int left = begin, right = middle+1;
+
+//     while (left <= middle && right <= end)
+//     {
+//         if (arr[left] < arr[right]) subArr.emplace_back(arr[left++]);
+//         else subArr.emplace_back(arr[right++]);
+//     }
+
+//     while (left <= middle)
+//         subArr.emplace_back(arr[left++]);
+
+//     while (right <= end)
+//         subArr.emplace_back(arr[right++]);
+    
+//     for (int i = begin, j = 0; i <= end && j < subArr.size(); i++, j++)
+//         arr[i] = subArr[j];
+// }
+
+// template<typename T>
+// void mergeSort_(std::vector<T>& arr, int begin, int end)
+// {
+//     if (begin < end)
+//     {
+//         int middle = begin + (end - begin) / 2;
+//         mergeSort_(arr, begin, middle);
+//         mergeSort_(arr, middle+1, end);
+//         merge(arr, begin, middle, end);
+//     }
+// }
+
+// template<typename T>
+// void mergeSort(std::vector<T>& arr)
+// {
+//     mergeSort_(arr, 0, arr.size()-1);
+// }
+
+/*
+ * Creating a subarray every time cost a lot
+ * Better way below
+ */
+
 template<typename T>
-void merge(std::vector<T>& arr, int begin, int middle, int end)
+void merge(std::vector<T>& arr, int begin, int middle, int end, std::vector<T>& tmp)
 {
-    std::vector<T> subArr;
     int left = begin, right = middle+1;
+    int k = begin;
 
     while (left <= middle && right <= end)
     {
-        if (arr[left] < arr[right]) subArr.emplace_back(arr[left++]);
-        else subArr.emplace_back(arr[right++]);
+        if (arr[left] < arr[right]) tmp[k++] = arr[left++];
+        else tmp[k++] = arr[right++];
     }
 
     while (left <= middle)
-        subArr.emplace_back(arr[left++]);
+        tmp[k++] = arr[left++];
 
     while (right <= end)
-        subArr.emplace_back(arr[right++]);
-    
-    for (int i = begin, j = 0; i <= end && j < subArr.size(); i++, j++)
-        arr[i] = subArr[j];
+        tmp[k++] = arr[right++];
+
+    for (int i = begin; i <= end; i++)
+        arr[i] = tmp[i];
 }
 
 template<typename T>
-void mergeSort_(std::vector<T>& arr, int begin, int end)
+void mergeSort_(std::vector<T>& arr, int begin, int end, std::vector<T>& tmp)
 {
     if (begin < end)
     {
         int middle = begin + (end - begin) / 2;
-        mergeSort_(arr, begin, middle);
-        mergeSort_(arr, middle+1, end);
-        merge(arr, begin, middle, end);
+        mergeSort_(arr, begin, middle, tmp);
+        mergeSort_(arr, middle+1, end, tmp);
+        merge(arr, begin, middle, end, tmp);
     }
 }
 
 template<typename T>
 void mergeSort(std::vector<T>& arr)
 {
-    mergeSort_(arr, 0, arr.size()-1);
+    std::vector<T> tmp(arr.size());
+    mergeSort_(arr, 0, arr.size() - 1, tmp);
+}
+
+/*
+ * a bit improved one
+ */
+
+template<typename T>
+void insertion(std::vector<T>& arr, int begin, int end)
+{
+    for (int i = begin + 1; i <= end; ++i)    // n - 1
+    {
+        T value = arr[i];
+        int idx = i;
+        for (int j = i - 1; j >= begin && value < arr[j]; --j, --idx)
+        {
+            arr[idx] = arr[j];
+        }
+        arr[idx] = value;
+    }
+}
+
+template<typename T>
+void improvedMergeSort_(std::vector<T>& arr, int begin, int end, std::vector<T>& tmp)
+{
+    if (end - begin > 20)
+    {
+        int middle = begin + (end - begin) / 2;
+        improvedMergeSort_(arr, begin, middle, tmp);
+        improvedMergeSort_(arr, middle+1, end, tmp);
+        merge(arr, begin, middle, end, tmp);
+    }
+    else
+    {
+        insertion(arr, begin, end);
+    }
+}
+
+template<typename T>
+void improvedMergeSort(std::vector<T>& arr)
+{
+    std::vector<T> tmp(arr.size());
+    improvedMergeSort_(arr, 0, arr.size() - 1, tmp);
 }
