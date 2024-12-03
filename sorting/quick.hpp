@@ -175,7 +175,7 @@ void insertionSort(std::vector<T>& arr, int begin, int end)
 template<typename T>
 void improvedQuickSort_(std::vector<T>& arr, int begin, int end)
 {
-    if (end - begin > 1)    // if there are more than 10 elements, it uses insertion sort.
+    if (end - begin > 25)    // if there are more than 10 elements, it uses insertion sort.
     {   // Quick sort begin.
         // Median of three, improved quick sort
         // 1. Sort the first, middle and last elements of the partition
